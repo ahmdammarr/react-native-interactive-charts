@@ -20,7 +20,7 @@ module.exports = {
     blockList: exclusionList([
       new RegExp(`${moduleRoot}/node_modules/react/.*`),
       new RegExp(`${moduleRoot}/node_modules/react-native/.*`),
-    ]),
+    ])
   },
   transformer: {
     getTransformOptions: async () => ({
