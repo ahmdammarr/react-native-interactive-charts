@@ -1,10 +1,10 @@
 {
-  "name": "@ammarr/react-native-interactive-charts",
-  "version": "1.0.0",
+  "name": "react-native-interactive-charts",
+  "version": "1.0.1",
   "description": "Based on `react-native-svg` and `d3` ## Installation",
   "homepage": "https://github.com/ahmdammarr/react-native-interactive-charts/readme",
   "main": "lib/index.js",
-  "types": "lib/types.ts",
+  "types": "lib/index.d.ts",
   "author": "Ahmed Ammarr",
   "license": "MIT",
   "files": [
