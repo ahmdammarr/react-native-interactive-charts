@@ -1,7 +1,7 @@
 {
-  "name": "react-native-interactive-charts",
+  "name": "@ammarr/react-native-interactive-charts",
   "version": "1.0.0",
-  "description": "",
+  "description": "Based on `react-native-svg` and `d3` ## Installation",
   "homepage": "https://github.com/ahmdammarr/react-native-interactive-charts/readme",
   "main": "lib/index.js",
   "types": "lib/types.ts",
@@ -76,5 +76,22 @@
       "json",
       "node"
     ]
+  },
+  "directories": {
+    "example": "example",
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmdammarr/react-native-interactive-charts.git"
+  },
+  "keywords": [
+    "charts",
+    "char",
+    "barchart",
+    "react-native"
+  ],
+  "bugs": {
+    "url": "https://github.com/ahmdammarr/react-native-interactive-charts/issues"
   }
 }
