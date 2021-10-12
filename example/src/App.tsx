@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import InteractiveChartsModule, {
+import  {
   BarChart
 } from 'react-native-interactive-charts'
 
 const App = () => {
-  useEffect(() => {
-    console.log(InteractiveChartsModule)
-  })
 
   return (
     <View style={styles.container}>
