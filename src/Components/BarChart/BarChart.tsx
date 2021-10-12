@@ -1,4 +1,3 @@
-
 import React, { Fragment } from 'react'
 import { Dimensions, StyleSheet, View, Animated } from 'react-native'
 import { G, Line, Rect, Svg, Text } from 'react-native-svg'
@@ -8,32 +7,30 @@ import { range, max } from 'd3-array'
 import { BarChartProps } from '../../types'
 
 const { width } = Dimensions.get('screen')
-export const BarChart = ({ 
-   data,
-   svgBackground,
-   containerHeight = 261.166,
-   containerWidth = width * 0.9,
-   graphMargin = 14,
-   barWidth =14,
-   graphGridWidth = width / 15,
-   axisColor = '#fff',
-   barColor = '#000000',
-   selectedBarColor = '#1a759f',
-   labelsColor = '#fff',
-   valuesColor = '#fff',
-   isClickableBars = false,
-   hideLabels,
-   hideLabelsAxis,
-   hideValues,
-   hideValuesAxis
-  }: BarChartProps): React.ReactElement => {
-
-    const [selectedBar, setSelectedBar] = React.useState('')
+export const BarChart = ({
+  data,
+  svgBackground,
+  containerHeight = 261.166,
+  containerWidth = width * 0.9,
+  graphMargin = 14,
+  barWidth = 14,
+  graphGridWidth = width / 15,
+  axisColor = '#fff',
+  barColor = '#000000',
+  selectedBarColor = '#1a759f',
+  labelsColor = '#fff',
+  valuesColor = '#fff',
+  isClickableBars = false,
+  hideLabels = false,
+  hideLabelsAxis = false,
+  hideValues = false,
+  hideValuesAxis = false
+}: BarChartProps): React.ReactElement => {
+  const [selectedBar, setSelectedBar] = React.useState('')
 
   const graphHeight = containerHeight - 2 * graphMargin
   const graphWidth = containerWidth - 2 * graphMargin
 
-  
   const xDomain = data.map(item => item.label)
   const xRange = [0, graphWidth]
   const x = scalePoint()
@@ -41,7 +38,6 @@ export const BarChart = ({
     .range(xRange)
     .padding(1)
 
-  
   const largestValue = Math.max(...data.map(item => item.value))
   const power = parseInt(
     `1${Array.from(Array(largestValue.toString().length - 1).fill('0')).join(
@@ -52,11 +48,9 @@ export const BarChart = ({
   const maxValu = Math.ceil(largestValue / power) * power
 
   const yAxiesValues = range(0, maxValu + power, power)
- 
 
-  const yDomain = [0, max(data, (d) => d.value)]
+  const yDomain = [0, max(data, d => d.value)]
   const yRange = [0, graphHeight]
-
 
   const y = scaleLinear()
     // eslint-disable-next-line
@@ -81,22 +75,26 @@ export const BarChart = ({
         {svgBackground || null}
 
         <G y={graphHeight + graphMargin} x={20}>
-          {!hideLabelsAxis&& <Line
-            x1={10}
-            y1={2}
-            x2={graphWidth - graphGridWidth + 10}
-            y2={2}
-            stroke={axisColor}
-            strokeWidth='1.5'
-          />}
-          {!hideValuesAxis&& <Line
-            x1={10}
-            y1={2}
-            x2={10}
-            y2={-y(largestValue + 50)}
-            stroke={axisColor}
-            strokeWidth='1.5'
-          />}
+          {!hideLabelsAxis && (
+            <Line
+              x1={10}
+              y1={2}
+              x2={graphWidth - graphGridWidth + 10}
+              y2={2}
+              stroke={axisColor}
+              strokeWidth='1.5'
+            />
+          )}
+          {!hideValuesAxis && (
+            <Line
+              x1={10}
+              y1={2}
+              x2={10}
+              y2={-y(largestValue + 50)}
+              stroke={axisColor}
+              strokeWidth='1.5'
+            />
+          )}
           {data.map((item, index) => {
             return (
               <Fragment key={String(index)}>
@@ -106,7 +104,11 @@ export const BarChart = ({
                   y={-y(item.value)}
                   width={barWidth}
                   height={y(item.value)}
-                  fill={isClickableBars&&selectedBar === item.label ? selectedBarColor : barColor}
+                  fill={
+                    isClickableBars && selectedBar === item.label
+                      ? selectedBarColor
+                      : barColor
+                  }
                   onPress={() => setSelectedBar(item.label)}
                 />
                 {selectedBar === item.label && (
@@ -121,40 +123,41 @@ export const BarChart = ({
               </Fragment>
             )
           })}
-          {!hideLabels && data.map(item => (
-            <Text
-              key={`label${item.value}`}
-              fontSize='10'
-              fill={labelsColor}
-              x={(x(item?.label) || 0) + 5}
-              y={12.5}
-              textAnchor='middle'
-            >
-              {item.label}
-            </Text>
-          ))}
-       
-          {!hideValues && yAxiesValues.map((item, index) => (
-            <Text
-              key={`label${item + index}`}
-              fontSize='10'
-              fill={valuesColor}
-              x={-4}
-              y={-y(item)}
-              textAnchor='middle'
-            >
-              {
-                //abbr(item)
-                item
-              }
-            </Text>
-          ))}
+          {!hideLabels &&
+            data.map(item => (
+              <Text
+                key={`label${item.value}`}
+                fontSize='10'
+                fill={labelsColor}
+                x={(x(item?.label) || 0) + 5}
+                y={12.5}
+                textAnchor='middle'
+              >
+                {item.label}
+              </Text>
+            ))}
+
+          {!hideValues &&
+            yAxiesValues.map((item, index) => (
+              <Text
+                key={`label${item + index}`}
+                fontSize='10'
+                fill={valuesColor}
+                x={-4}
+                y={-y(item)}
+                textAnchor='middle'
+              >
+                {
+                  //abbr(item)
+                  item
+                }
+              </Text>
+            ))}
         </G>
       </Svg>
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
   svgContainer: {
