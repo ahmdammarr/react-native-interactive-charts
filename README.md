@@ -1,4 +1,6 @@
 # React Native Interactive Charts
+
+
 Based on `react-native-svg` and `d3`
 ## Installation
 
@@ -11,7 +13,7 @@ or
 ## Components
 
 ### BarChart
-
+![title](GraphImages/barChart.png)
 ```javascript
 <BarChart
   data={[
